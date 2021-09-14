@@ -9,9 +9,8 @@
  * @param {string} s
  * @return {number}
  */
-//Your runtime beats 18.76 % of javascript submissions
-//Your memory usage beats 22.42 % of javascript submissions (45.9 MB)
-//コード汚い
+ //Your runtime beats 95.37 % of javascript submissions
+ //Your memory usage beats 73.38 % of javascript submissions (44.4 MB)
 var romanToInt = function(s) {
     const romenArray = {
         'I': 1,
@@ -25,47 +24,11 @@ var romanToInt = function(s) {
 
     let answer = 0;
     for(let i = 0; i < s.length; i++) {
-        if(s[i] === 'I') {
-            if(s[i+1] === 'V') {
-                answer += 4;
-                i++;
-                continue;
-            }
-            if(s[i+1] === 'X') {
-                answer += 9;
-                i++;
-                continue;
-            }
-        }
-        if(s[i] === 'X') {
-            if(s[i+1] === 'L') {
-                answer += 40;
-                i++;
-                continue;
-            }
-            if(s[i+1] === 'C') {
-                answer += 90;
-                i++;
-                continue;
-            }
-
-        }
-        if(s[i] === 'C') {
-            if(s[i+1] === 'D') {
-                answer += 400;
-                i++;
-                continue;
-            }
-            if(s[i+1] === 'M') {
-                answer += 900;
-                i++;
-                continue;
-            }
-
-        }
-        
-        answer += romenArray[s[i]];
-            
+        if(i !==  s.length-1 && romenArray[s[i]] < romenArray[s[i+1]]) {
+            answer -= romenArray[s[i]];
+        } else {
+            answer += romenArray[s[i]];
+        }       
     }
 
     return answer;
