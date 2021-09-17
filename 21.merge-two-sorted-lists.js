@@ -7,50 +7,29 @@
 // @lc code=start
 /**
  * Definition for singly-linked list.
+ *
+ * function ListNode(val, next) {
+ *    this.val = (val===undefined ? 0 : val)
+ *    this.next = (next===undefined ? null : next)
+ * }
  */
-function ListNode(val, next) {
-    this.val = (val===undefined ? 0 : val)
-    this.next = (next===undefined ? null : next)
-}
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
-//愚直な回答
+//再帰での解法
 var mergeTwoLists = function(l1, l2) {
-    const tmpArray = [];
-
-    while(l1){
-        tmpArray.push(l1.val);
-        l1 = l1.next;
-    }  
-    while(l2){
-        tmpArray.push(l2.val);
-        l2 = l2.next;
-    }  
-    if(!tmpArray.length){
-        return null;
+    if(!l1 || !l2) {
+        return l1 || l2;
     }
-    tmpArray.sort((a,b) => a - b);
-    const headNode = new ListNode(tmpArray[0]);
-
-    if(tmpArray.length === 1) {
-        return headNode;
+    if(l1.val >= l2.val) {
+        l2.next = mergeTwoLists(l1, l2.next);
+        return l2;
+    } else {
+        l1.next = mergeTwoLists(l1.next, l2);
+        return l1;
     }
-    
-
-    let  currentNode = new ListNode();
-    headNode.next = currentNode;
-    for(let i = 1; i < tmpArray.length; i++) {
-        currentNode.val = tmpArray[i];
-        if(tmpArray[i+1] !== undefined) {
-            currentNode.next = new ListNode();
-        }
-        currentNode = currentNode.next;
-    }
-
-    return headNode;
 };
 
 // @lc code=end
