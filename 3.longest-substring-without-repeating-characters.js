@@ -17,6 +17,8 @@ var lengthOfLongestSubstring = function (s) {
         longestLength = 1;
     }
 
+    //Your runtime beats 17.93 % of javascript submissions
+    //Your memory usage beats 40.74 % of javascript submissions (45 MB)
     for (let i = 0; i < s.length; i++) {
         for (let j = i; j < s.length; j++) {
             if (currentStr.indexOf(s[j]) !== -1) {
